@@ -9,9 +9,10 @@ const RootComponentOptions = defineComponent({
       hello: 'world',
     };
   },
-  computed: {
+  methods: {
     plus() {
-      return this.a + 1;
+      this.a = this.a + 1;
+      return this.a;
     },
   },
   template: `<div> <button type="button" @click="plus">{{ a }}</button></div>`,
@@ -21,4 +22,3 @@ const RootComponentOptions = defineComponent({
 
 const app = createApp(RootComponentOptions);
 const vm = app.mount('#app');
-console.log(vm.a);
