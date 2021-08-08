@@ -6,12 +6,11 @@ const RootComponentOptions = defineComponent({
   data() {
     return {
       a: 0,
-      hello: 'world',
     };
   },
   methods: {
     plus() {
-      this.a = this.a + 1;
+      this.a += 1;
       return this.a;
     },
   },

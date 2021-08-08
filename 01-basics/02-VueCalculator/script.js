@@ -1,3 +1,4 @@
+// import { sum } from 'lodash-es';
 import { createApp, defineComponent } from './vendor/vue.esm-browser.js';
 
 const RootComponentOptions = defineComponent({
@@ -7,29 +8,16 @@ const RootComponentOptions = defineComponent({
     return {
       a: 1,
       b: 2,
-      c: 3,
       operand: 'sum',
-      sum: 'sum',
-      subtract: 'subtract',
-      multiply: 'multiply',
-      divide: 'divide',
+      с: 3,
     };
   },
   computed: {
-    FirstNumber() {
-      return this.a;
-    },
-    SecondNumber() {
-      return this.b;
-    }
   },
   methods: {
-    showOperand() {
-      return this.operand;
-    },
     mathOperation() {
-      this.FirstNumber;
-      this.SecondNumber;
+      this.showOperand();
+      console.log(this.operand);
       if (this.operand === 'sum') {
         return (this.c = this.a + this.b);
       } else if (this.operand === 'subtract') {
