@@ -5,9 +5,7 @@ let loadMeetup;
 function fetchMeetupById(meetupId) {
   return fetch(`${API_URL}/meetups/${meetupId}`).then((response) => {
     if (response.ok) {
-      response.json().then((data) => {
-        return loadMeetup = data;
-      });
+      return response.json();
     } else {
       return response.json().then((error) => {
         throw error;
@@ -23,14 +21,21 @@ const RootComponentOptions = defineComponent({
 
   data() {
     return {
-      meetup: loadMeetup,
+      meetup: null,
       meetupId: 1,
     };
   },
-  methods: {
-    toggleToCurrentMeetup() {
-      return fetchMeetupById(this.meetupId);
+  computed: {
+    loadMeetup(meetupId) {
+      fetchMeetupById(meetupId).then((data) => {
+        data;
+      });
     },
+  },
+  methods: {
+    // toggleToCurrentMeetup() {
+    //   return fetchMeetupById(this.meetupId);
+    // },
     // fetchMeetupById(meetupId) {
     //   return fetch(`${API_URL}/meetups/${meetupId}`).then((response) => {
     //     if (response.ok) {
@@ -48,7 +53,8 @@ const RootComponentOptions = defineComponent({
   watch: {
     meetupId: {
       handler() {
-        this.toggleToCurrentMeetup();
+        // this.toggleToCurrentMeetup();
+        loadMeetup(this.meetupId);
       },
     },
   },

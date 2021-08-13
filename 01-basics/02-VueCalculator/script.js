@@ -9,23 +9,18 @@ const RootComponentOptions = defineComponent({
       a: 1,
       b: 2,
       operand: 'sum',
-      с: 3,
     };
-  },
-  computed: {
   },
   methods: {
     mathOperation() {
-      this.showOperand();
-      console.log(this.operand);
       if (this.operand === 'sum') {
-        return (this.c = this.a + this.b);
+        return Number(this.a) + Number(this.b);
       } else if (this.operand === 'subtract') {
-        return (this.c = this.a - this.b);
+        return this.a - this.b;
       } else if (this.operand === 'multiply') {
-        return (this.c = this.a * this.b);
+        return this.a * this.b;
       } else {
-        return (this.c = this.a / this.b);
+        return this.a / this.b;
       }
     },
   },
@@ -35,10 +30,10 @@ const RootComponentOptions = defineComponent({
     </div>
 
     <div class="col" style="display: flex; flex-direction: column; font-family: emoji">
-      <label for="sum"><input v-model="operand" type="radio" id="sum" :value="sum" /> ➕</label>
-      <label for="subtract"><input v-model="operand" type="radio" id="subtract" :value="subtract" /> ➖</label>
-      <label for="multiply"><input v-model="operand" type="radio" id="multiply" :value="multiply" /> ✖</label>
-      <label for="divide"><input v-model="operand" type="radio" id="divide" :value="divide" /> ➗</label>
+      <label for="sum"><input v-model="operand" type="radio" id="sum" value="sum" /> ➕</label>
+      <label for="subtract"><input v-model="operand" type="radio" id="subtract" value="subtract" /> ➖</label>
+      <label for="multiply"><input v-model="operand" type="radio" id="multiply" value="multiply" /> ✖</label>
+      <label for="divide"><input v-model="operand" type="radio" id="divide" value="divide" /> ➗</label>
     </div>
 
     <div class="col">
