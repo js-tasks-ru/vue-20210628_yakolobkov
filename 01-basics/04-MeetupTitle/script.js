@@ -26,13 +26,26 @@ const RootComponentOptions = defineComponent({
     };
   },
   computed: {
+    // mathOperation() {
+    //   this.meetup = loadMeetup(meetupId);
+    // },
+  },
+    // loadMeetup(meetupId) {
+    //   async() => {
+    //     await fetchMeetupById(meetupId).then((res) => {
+    //       this.meetup =  res;
+    //     });
+    //   }
+    // },
+  methods: {
     loadMeetup(meetupId) {
-      fetchMeetupById(meetupId).then((data) => {
-        data;
+      fetchMeetupById(meetupId).then((res) => {
+        console.log(res);
+        this.meetup = res;
+        return this.meetup;
       });
     },
   },
-  methods: {
     // toggleToCurrentMeetup() {
     //   return fetchMeetupById(this.meetupId);
     // },
@@ -49,7 +62,6 @@ const RootComponentOptions = defineComponent({
     //     }
     //   });
     // },
-  },
   watch: {
     meetupId: {
       handler() {
