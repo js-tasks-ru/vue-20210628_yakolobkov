@@ -1,4 +1,3 @@
-import { set } from './core-js/core/dict';
 import { createApp, defineComponent } from './vendor/vue.esm-browser.js';
 
 const emails = [
@@ -34,45 +33,28 @@ const RootComponentOptions = defineComponent({
 
   data() {
     return {
-      markedEmails: ['email', 'marked'],
+      markedEmails: null,
       searchValue: '',
     };
   },
-  // computed: {
-  //   loadEmails() {
-  //     this.markedEmails = emails.map(function (email) {
-  //       return { email, marked: false };
-  //     })
-  //   }
-  // },
   methods: {
     loadEmails() {
       this.markedEmails = emails.map(function (email) {
-        set(email, email);
-        set('marked', false);
+        let element = { email, 'marked': false };
+        return element;
       });
-      console.log(emails);
-      console.log(this.markedEmails);
     },
     findEmails() {
-      this.markedEmails.forEach((item) => {
-        console.log(item);
-        // if (this.searchValue !== '' && item.email.includes(`${this.SearchValue}`)) {
-        //   return item.marked = true;
-        // } else {
-        //   return item.marked = false;
-        // }
-      });
-
-      console.log(this.markedEmails);
-      // this.emails.forEach((item) => {
-      //   if (this.searchValue !== '') {
-      //     item.email.includes(`${this.SearchValue}`) ? item.marked = true : item.marked = false;
-      //   } else {
-      //     item.marked = false;
-      //   }
-      // });
-      // return this.emails;
+      this.loadEmails();
+      if (this.markedEmails) {
+        this.markedEmails.forEach((item) => {
+          if (this.searchValue !== '' && item.email.toLowerCase().includes(`${this.searchValue}`)) {
+            return item.marked = true;
+          } else {
+            return item.marked = false;
+          }
+        });
+      }
     },
   },
   watch: {
@@ -87,7 +69,7 @@ const RootComponentOptions = defineComponent({
     <div class="form-group">
       <input v-model="searchValue" type="search" />
     </div>
-    <ul v-for="email in markedEmails">
+    <ul v-if="markedEmails" v-for="email in markedEmails">
       <li :class="{ marked: email.marked }">{{ email.email }}</li>
     </ul>
     </div>`,
