@@ -1,7 +1,5 @@
 const API_URL = 'https://course-vue.javascript.ru/api';
 
-let loadMeetup;
-
 function fetchMeetupById(meetupId) {
   return fetch(`${API_URL}/meetups/${meetupId}`).then((response) => {
     if (response.ok) {
@@ -25,48 +23,18 @@ const RootComponentOptions = defineComponent({
       meetupId: 1,
     };
   },
-  computed: {
-    // mathOperation() {
-    //   this.meetup = loadMeetup(meetupId);
-    // },
-  },
-    // loadMeetup(meetupId) {
-    //   async() => {
-    //     await fetchMeetupById(meetupId).then((res) => {
-    //       this.meetup =  res;
-    //     });
-    //   }
-    // },
   methods: {
     loadMeetup(meetupId) {
       fetchMeetupById(meetupId).then((res) => {
-        console.log(res);
         this.meetup = res;
-        return this.meetup;
       });
     },
   },
-    // toggleToCurrentMeetup() {
-    //   return fetchMeetupById(this.meetupId);
-    // },
-    // fetchMeetupById(meetupId) {
-    //   return fetch(`${API_URL}/meetups/${meetupId}`).then((response) => {
-    //     if (response.ok) {
-    //       response.json().then((data) => {
-    //         return this.meetup = data;
-    //       });
-    //     } else {
-    //       return response.json().then((error) => {
-    //         throw error;
-    //       });
-    //     }
-    //   });
-    // },
   watch: {
     meetupId: {
+      immediate: true,
       handler() {
-        // this.toggleToCurrentMeetup();
-        loadMeetup(this.meetupId);
+        this.loadMeetup(this.meetupId);
       },
     },
   },
@@ -79,7 +47,7 @@ const RootComponentOptions = defineComponent({
 
     <hr />
 
-    <h3>{{ meetup.title }}</h3>
+    <h3>{{ meetup?.title }}</h3>
   </div>`,
 });
 

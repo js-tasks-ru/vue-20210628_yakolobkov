@@ -5,16 +5,16 @@ const RootComponentOptions = defineComponent({
 
   data() {
     return {
-      a: 0,
+      result: 0,
     };
   },
   methods: {
     plus() {
-      this.a += 1;
-      return this.a;
+      this.result += 1;
+      return this.result;
     },
   },
-  template: `<div> <button type="button" @click="plus">{{ a }}</button></div>`,
+  template: `<div> <button type="button" @click="plus">{{ result }}</button></div>`,
 });
 
 // Создайте Vue приложение

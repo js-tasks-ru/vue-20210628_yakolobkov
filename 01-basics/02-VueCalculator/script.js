@@ -7,36 +7,38 @@ const RootComponentOptions = defineComponent({
     return {
       a: 1,
       b: 2,
-      operand: 'sum',
+      typeOperation: 'sum',
     };
   },
   computed: {
     mathOperation() {
-      if (this.operand === 'sum') {
-        return Number(this.a) + Number(this.b);
-      } else if (this.operand === 'subtract') {
+      if (this.typeOperation === 'sum') {
+        return this.a + this.b;
+      } else if (this.typeOperation === 'subtract') {
         return this.a - this.b;
-      } else if (this.operand === 'multiply') {
+      } else if (this.typeOperation === 'multiply') {
         return this.a * this.b;
-      } else {
+      } else if (this.typeOperation === 'divide') {
         return this.a / this.b;
+      } else {
+        return 0;
       }
     },
   },
   template: `<div class="row">
     <div class="col">
-      <input v-model="a" type="number" />
+      <input v-model.number="a" type="number" />
     </div>
 
     <div class="col" style="display: flex; flex-direction: column; font-family: emoji">
-      <label for="sum"><input v-model="operand" type="radio" id="sum" value="sum" /> ➕</label>
-      <label for="subtract"><input v-model="operand" type="radio" id="subtract" value="subtract" /> ➖</label>
-      <label for="multiply"><input v-model="operand" type="radio" id="multiply" value="multiply" /> ✖</label>
-      <label for="divide"><input v-model="operand" type="radio" id="divide" value="divide" /> ➗</label>
+      <label for="sum"><input v-model="typeOperation" type="radio" id="sum" value="sum" /> ➕</label>
+      <label for="subtract"><input v-model="typeOperation" type="radio" id="subtract" value="subtract" /> ➖</label>
+      <label for="multiply"><input v-model="typeOperation" type="radio" id="multiply" value="multiply" /> ✖</label>
+      <label for="divide"><input v-model="typeOperation" type="radio" id="divide" value="divide" /> ➗</label>
     </div>
 
     <div class="col">
-      <input v-model="b" type="number" />
+      <input v-model.number="b" type="number" />
     </div>
 
     <div class="col">=</div>
