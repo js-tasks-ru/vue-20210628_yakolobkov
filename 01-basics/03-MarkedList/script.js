@@ -37,15 +37,17 @@ const RootComponentOptions = defineComponent({
       searchValue: '',
     };
   },
-  methods: {
+  computed: {
     loadEmails() {
-      this.markedEmails = emails.map(function (email) {
+      return emails.map(function (email) {
         let element = { email, 'marked': false };
         return element;
       });
     },
+  },
+  methods: {
     findEmails() {
-      this.loadEmails();
+      this.markedEmails = this.loadEmails;
       if (this.markedEmails) {
         this.markedEmails.forEach((item) => {
           if (this.searchValue !== '' && item.email.toLowerCase().includes(`${this.searchValue}`)) {
