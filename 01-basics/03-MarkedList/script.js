@@ -44,22 +44,21 @@ const RootComponentOptions = defineComponent({
         return element;
       });
     },
-    // loadEmailsInput() {
-    //   return this.markedEmails.map(function (item) {
-    //     let element;
-    //     if (this.searchValue !== '' && item.email.toLowerCase().includes(`${this.searchValue}`)) {
-    //       return element = { email: item.email, 'marked': true };
-    //     } else {
-    //       return element = { email: item.email, 'marked': false };
-    //     }
-    //   });
-    // }
+    loadEmailsInput() {
+      return this.markedEmails.map(function (item) {
+        if (this.searchValue && item.email.toLowerCase().includes(`${this.searchValue}`)) {
+          return item = { email: item.email, 'marked': true };
+        } else {
+          return item = { email: item.email, 'marked': false };
+        }
+      });
+    }
   },
   methods: {
     findEmails() {
       if (this.markedEmails) {
         this.markedEmails.forEach((item) => {
-          if (this.searchValue !== '' && item.email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
+          if (this.searchValue && item.email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
             return item.marked = true;
           } else {
             return item.marked = false;
@@ -68,13 +67,19 @@ const RootComponentOptions = defineComponent({
       }
     },
   },
-  mounted() {
+  beforeMount() {
     this.markedEmails = this.loadEmails;
   },
+  // updated() {
+  //   this.loadEmailsInput(this.searchValue);
+  // },
   watch: {
     searchValue: {
       immediate: true,
       handler() {
+        // if (this.markedEmails) {
+        //   this.loadEmailsInput;
+        // }
         this.findEmails();
       }
     },
