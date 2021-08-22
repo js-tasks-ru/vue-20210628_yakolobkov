@@ -44,13 +44,22 @@ const RootComponentOptions = defineComponent({
         return element;
       });
     },
+    // loadEmailsInput() {
+    //   return this.markedEmails.map(function (item) {
+    //     let element;
+    //     if (this.searchValue !== '' && item.email.toLowerCase().includes(`${this.searchValue}`)) {
+    //       return element = { email: item.email, 'marked': true };
+    //     } else {
+    //       return element = { email: item.email, 'marked': false };
+    //     }
+    //   });
+    // }
   },
   methods: {
     findEmails() {
-      this.markedEmails = this.loadEmails;
       if (this.markedEmails) {
         this.markedEmails.forEach((item) => {
-          if (this.searchValue !== '' && item.email.toLowerCase().includes(`${this.searchValue}`)) {
+          if (this.searchValue !== '' && item.email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
             return item.marked = true;
           } else {
             return item.marked = false;
@@ -58,6 +67,9 @@ const RootComponentOptions = defineComponent({
         });
       }
     },
+  },
+  mounted() {
+    this.markedEmails = this.loadEmails;
   },
   watch: {
     searchValue: {
