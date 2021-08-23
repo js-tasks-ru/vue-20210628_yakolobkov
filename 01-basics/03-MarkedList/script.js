@@ -44,7 +44,7 @@ const RootComponentOptions = defineComponent({
         return element;
       });
     },
-    loadEmailsInput() {
+    findEmails() {
       return this.markedEmails.map((item) => {
         if (this.searchValue && item.email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
           return item.marked = true;
@@ -62,7 +62,7 @@ const RootComponentOptions = defineComponent({
       immediate: true,
       handler() {
         if (this.markedEmails) {
-          this.loadEmailsInput;
+          this.findEmails;
         }
       }
     },
