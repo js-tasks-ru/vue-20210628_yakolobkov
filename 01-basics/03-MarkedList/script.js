@@ -45,42 +45,25 @@ const RootComponentOptions = defineComponent({
       });
     },
     loadEmailsInput() {
-      return this.markedEmails.map(function (item) {
-        if (this.searchValue && item.email.toLowerCase().includes(`${this.searchValue}`)) {
-          return item = { email: item.email, 'marked': true };
+      return this.markedEmails.map((item) => {
+        if (this.searchValue && item.email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
+          return item.marked = true;
         } else {
-          return item = { email: item.email, 'marked': false };
+          return item.marked = false;
         }
       });
     }
   },
-  methods: {
-    findEmails() {
-      if (this.markedEmails) {
-        this.markedEmails.forEach((item) => {
-          if (this.searchValue && item.email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
-            return item.marked = true;
-          } else {
-            return item.marked = false;
-          }
-        });
-      }
-    },
-  },
   beforeMount() {
     this.markedEmails = this.loadEmails;
   },
-  // updated() {
-  //   this.loadEmailsInput(this.searchValue);
-  // },
   watch: {
     searchValue: {
       immediate: true,
       handler() {
-        // if (this.markedEmails) {
-        //   this.loadEmailsInput;
-        // }
-        this.findEmails();
+        if (this.markedEmails) {
+          this.loadEmailsInput;
+        }
       }
     },
   },
