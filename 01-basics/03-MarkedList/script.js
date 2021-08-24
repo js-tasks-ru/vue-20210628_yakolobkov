@@ -33,38 +33,18 @@ const RootComponentOptions = defineComponent({
 
   data() {
     return {
-      markedEmails: null,
       searchValue: '',
     };
   },
   computed: {
-    loadEmails() {
-      return emails.map(function (email) {
-        let element = { email, 'marked': false };
-        return element;
-      });
-    },
-    findEmails() {
-      return this.markedEmails.map((item) => {
-        if (this.searchValue && item.email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
-          return item.marked = true;
+    markedEmails() {
+      return emails.map((email) => {
+        if (this.searchValue && email.toLowerCase().includes(`${this.searchValue}`.toLowerCase())) {
+          return { email, marked: true };
         } else {
-          return item.marked = false;
+          return { email, marked: false };
         }
       });
-    }
-  },
-  beforeMount() {
-    this.markedEmails = this.loadEmails;
-  },
-  watch: {
-    searchValue: {
-      immediate: true,
-      handler() {
-        if (this.markedEmails) {
-          this.findEmails;
-        }
-      }
     },
   },
   template: `<div class="container">
